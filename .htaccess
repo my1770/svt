@@ -1,0 +1,24 @@
+# Защита dotfiles (.access_token.json, .git, .htaccess и т.п.)
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+# Закрыть доступ к служебным файлам
+<FilesMatch "^(config\.php|version\.php|composer\.(json|lock))$">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "\.(log|md)$">
+    Require all denied
+</FilesMatch>
+
+# HSTS — только по HTTPS (mod_ssl выставляет env HTTPS=on)
+<IfModule mod_headers.c>
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains" env=HTTPS
+</IfModule>
+
+# Запретить выполнение скриптов в uploads и logs, доступ к служебному CLI
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(uploads|logs|cli)/ - [F,L]
+</IfModule>

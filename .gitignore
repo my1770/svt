@@ -1,0 +1,8 @@
+node_modules/
+package.json
+package-lock.json
+uploads/
+logs/
+.access_token.json
+*.log
+.DS_Store

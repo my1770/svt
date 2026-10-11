@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[x-cloak] {
+  display: none !important;
+}
+
+@layer base {
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    background-attachment: fixed;
+    color: #1e293b;
+  }
+}
+
+@layer components {
+  .edo-progress {
+    background: linear-gradient(90deg, #00B4D8, #0077B6, #48CAE4, #0077B6, #00B4D8);
+    background-size: 200% 100%;
+    animation: edo-shimmer 1.2s infinite linear;
+  }
+}
+
+@keyframes edo-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
