@@ -120,18 +120,7 @@ if ($method === 'GET') {
         if (!array_key_exists($name, $firstByAlias)) {
             $stFirst->execute(['%' . "\n" . $escLike($name) . "\n%"]);
             $row = $stFirst->fetch();
-            $match = null;
-            if ($row) {
-                $match = [
-                    'id'         => (int)$row['id'],
-                    'name'       => $row['name'],
-                    'aliases'    => $row['aliases'],
-                    'short_name' => $row['short_name'],
-                    'building'   => $row['building'],
-                    'room'       => $row['room'],
-                ];
-            }
-            $firstByAlias[$name] = $match;
+            $firstByAlias[$name] = $row ?: null;
         }
         $it['alias_match'] = $firstByAlias[$name];
     }

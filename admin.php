@@ -318,7 +318,7 @@ pageTop('Администрирование', $user);
           <div x-show="d.type === 'new_arrival' && d.alias_match" class="rounded-[14px] bg-amber-50 border border-amber-200 p-2.5">
             <span class="text-xs font-semibold text-amber-800">В базе по сопоставлению: </span>
             <span class="text-xs text-amber-900 break-words"
-                  x-text="discAliasLine(d)"></span>
+                  x-text="(d.alias_match.short_name || d.alias_match.name || '—') + (d.alias_match.building ? ' — ' + d.alias_match.building + ', каб. ' + (d.alias_match.room || '—') : '')"></span>
           </div>
         </div>
 
@@ -809,12 +809,6 @@ function adminPage(isAdmin) {
     },
     discTypeLabel(t) {
       return { new_arrival: 'Новое поступление', write_off: 'Списание', unrecorded_move: 'Перемещение' }[t] || t;
-    },
-    /* Строка «В базе по сопоставлению» (d.alias_match может быть null/undefined) */
-    discAliasLine(d) {
-      const m = d && d.alias_match ? d.alias_match : null;
-      if (!m) return '';
-      return (m.short_name || m.name || '—') + (m.building ? ' — ' + m.building + ', каб. ' + (m.room || '—') : '');
     },
     /* Строка «В базе»: Наименование · Здание · Кабинет · Инв. · Сер. */
     discEqLine(eq) {
